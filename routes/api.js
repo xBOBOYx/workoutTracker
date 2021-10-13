@@ -6,51 +6,48 @@ const express = require('express');
 
 router.post("/api/workouts", ({ body }, res) => {
   Workout.create({})
-    .then(dbWorkout => {
+    .then((dbWorkout) => {
       res.json(dbWorkout);
     })
-    .catch(err => {
-      res.status(400).json(err);
+    .catch(({ message }) => {
+      console.log(message);
     });
 });
 
-router.get("/api/workouts", ({ body }, res) => {
+router.put("/api/workouts/:id", ({ params, body }, res) => {
+  console.log("PARAMS", body, params);
+
+  Workout.findOneAndUpdate(
+    { _id: params.id },
+    { $push: { exercises: body } },
+    { new: true }
+  )
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+router.get("/api/workouts/range", (req, res) => {
   Workout.find({})
-    .then(dbWorkout => {
+    .limit(7)
+    .then((dbWorkout) => {
       res.json(dbWorkout);
     })
-    .catch(err => {
-      res.status(400).json(err);
+    .catch((err) => {
+      res.json(err);
     });
 });
 
-router.put("/api/workouts/:id", ({ body, params }, res) => {
-  Workout.findByIdAndUpdate(params.id, { $push: { exercises: body } })
-    .then(dbWorkout => {
-      res.json(dbWorkout);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
-});
-
-router.get("/api/workouts/range", ({ body }, res) => {
+router.get("/api/workouts", (req, res) => {
   Workout.find({})
-    .then(dbWorkout => {
+    .then((dbWorkout) => {
       res.json(dbWorkout);
     })
-    .catch(err => {
-      res.status(400).json(err);
-    });
-});
-
-router.get("/api/workouts/:id", ({ params }, res) => {
-  Workout.findById(params.id)
-    .then(dbWorkout => {
-      res.json(dbWorkout);
-    })
-    .catch(err => {
-      res.status(400).json(err);
+    .catch((err) => {
+      res.json(err);
     });
 });
 
