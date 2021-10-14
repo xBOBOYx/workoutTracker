@@ -32,7 +32,7 @@ npm i, mongod
 As a user, I want to be able to view create and track daily workouts. I want to be able to log multiple exercises in a workout on a given day. I should also be able to track the name, type, weight, sets, reps, and duration of exercise. If the exercise is a cardio exercise, I should be able to track my distance traveled.
 
 
-### [Check out the Fitness Tracker!](https://cryptic-river-66312.herokuapp.com/?id=61686b80370db300163922ce)
+### [Check out the Workout Tracker!](https://cryptic-river-66312.herokuapp.com/?id=61686b80370db300163922ce)
 
 ## <ins>License</ins>
 
